@@ -3,28 +3,51 @@
 ###### Application de syndicat pour gérer les paiement pour chaque appartement
 
 ## Contexte du projet
+<<<<<<< HEAD
 
 ###### Dans votre agence web, un client demande de créer un système de gestion de paiement cotisation syndicale pour chaque mois. Vous êtes amenés à programmer   l’application proposant les fonctionnalités suivantes : Syndic d'immeuble peut :
+=======
+Dans votre agence web, un client demande de créer un système de gestion de paiement cotisation syndicale pour chaque mois. Vous êtes amenés à programmer l’application proposant les fonctionnalités suivantes : Syndic d'immeuble peut :
+>>>>>>> 8be4ebfb3ae3729aa405c2d546f33952355bdea0
 
-     + Gérer les appartements (Création et modification, suppression)
-     + Gérer les paiement chaque mois pour chaque appartement (Création et modification)
-     + Imprimer la facture pour chaque paiement d’un appartement
-    
-    
-## Partie Back-end :
+          • Gérer les appartements (Création et modification, suppression)
+          • Gérer les paiement chaque mois pour chaque appartement (Création et modification)
+          • Imprimer la facture pour chaque paiement d’un appartement
 
+## Run the App
+
+> this app is under continuous development, so this instructions may change later
+
++ First clone the project
+
+          git clone https://github.com/ABDERRAZZAQMars/Syndicat-Application.git
+
+<<<<<<< HEAD
     + Réaliser votre application avec NodeJS(ExpressJs) / MongoDb en Back-end
+=======
 
-    + Utiliser Mongoose comme ODM pour la connexion avec la base données
++ Inside the project you have two layers, frontend and server, locate to each directory and install all needed dependencies
+>>>>>>> 8be4ebfb3ae3729aa405c2d546f33952355bdea0
 
-    + Les Testes Unitaires pour chaque Controller en Back-end Sont obligatoire
+  ```bash
+  cd client
+  npm install
+  ```
 
-    + Programmer middleware pour La gestion des erreurs (Error Handling)
+  ```bash
+  cd server
+  npm install
+  ```
 
-    + Programmer middleware pour vérification est la sécurité d’authentification en JWT
++ Inside **frontend** run
 
-    + La protection des routes d’application
+  ```bash
+  npm start
+  ```
 
++ Open another terminal tab, enter the **server** folder and run
+
+<<<<<<< HEAD
 
 
 
@@ -42,3 +65,8 @@
 ## Partie Déploiment :
 
     + Générer docker Image.(Backend-Frontend) et créer network entre les deux
+=======
+  ```bash
+  npm start
+  ```
+>>>>>>> 8be4ebfb3ae3729aa405c2d546f33952355bdea0
