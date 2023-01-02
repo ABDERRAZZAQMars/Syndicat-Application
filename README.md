@@ -1,6 +1,9 @@
 # Syndicat-Application
+
 ###### Application de syndicat pour gérer les paiement pour chaque appartement
+
 ## Contexte du projet
+
 ###### Dans votre agence web, un client demande de créer un système de gestion de paiement cotisation syndicale pour chaque mois. Vous êtes amenés à programmer   l’application proposant les fonctionnalités suivantes : Syndic d'immeuble peut :
 
      + Gérer les appartements (Création et modification, suppression)
@@ -9,7 +12,6 @@
     
     
 ## Partie Back-end :
-
 
     + Réaliser votre application avec NodeJS(ExpressJs) / MongoDb en Back-end
 
@@ -28,8 +30,6 @@
 
 ## Partie front-End ReactJs:
 
-
-
     + Utilisation des Hooks (Usestate ,UseEffect) est obligatoire
 
     + Définir votre routes en utilisant NestedRouted
@@ -40,7 +40,5 @@
 
 
 ## Partie Déploiment :
-
-
 
     + Générer docker Image.(Backend-Frontend) et créer network entre les deux
