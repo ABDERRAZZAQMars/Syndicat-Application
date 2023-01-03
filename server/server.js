@@ -2,24 +2,28 @@ const dotenv = require('dotenv').config()
 
 const express = require('express')
 const app = express();
-
 const port = process.env.PORT || 8081
-
 const Authentification = require('./routes/AuthRoute');
+const globalError = require('./Middlewares/errorHandler');
 
-// parse requests of content-type - application/json
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// parse requests of content-type
-app.use(express.urlencoded({ extended: true }));
-
-// simple route
+//simple_route
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to Syndicat Application" });
   });
 
-
 //Authentification_Routes
 app.use('/api/auth', Authentification);
 
-app.listen(port,()=>console.log(`Server started on port ${port}`))
+//Error_Handler
+app.use(globalError);
+
+app.listen(port, (err) => {
+  if (!err) {
+    console.log(`Server started on port ${port}`)
+  } else {
+      console.log(err)
+  }
+});
