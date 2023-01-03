@@ -5,6 +5,7 @@ const app = express();
 const port = process.env.PORT || 8081
 const Authentification = require('./routes/AuthRoute');
 const globalError = require('./Middlewares/errorHandler');
+const db = require('./config/db')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
