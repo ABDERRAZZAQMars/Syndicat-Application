@@ -33,8 +33,8 @@ const Login = asyncHandler(async (req, res) => {
                 role: user.role
             })
             return res.status(200).json({ message: 'User is verified' })
-        } else { return res.status(401).json({ message: 'User not verified' }) }
-    } else { return res.status(401).json({ message: 'Invalid Email Or Password' }) }
+        } else { return res.status(200).json({ message: 'User not verified' }) }
+    } else { return res.status(200).json({ message: 'Invalid Email Or Password' }) }
 })
 
 // method : post
@@ -43,7 +43,7 @@ const Login = asyncHandler(async (req, res) => {
 const ForgetPassword = asyncHandler(async (req, res) => {
     const { email } = req.body
     if (!email) {
-        return res.status(400).json({ message: 'Please ADD field' })
+        return res.status(200).json({ message: 'Please ADD field' })
     }
     const user = await User.findOne({ email })
     if (user) {
@@ -54,15 +54,31 @@ const ForgetPassword = asyncHandler(async (req, res) => {
         await resetPasswordEmail(user.name, user.email, user.token)
         return res.status(200).send('plaise check your email for reset your password of email')
     }
-    return res.status(400).json({ message: 'Invalid email' })
+    return res.status(200).json({ message: 'Invalid email' })
 })
 
 // method : post
 // url : api/auth/resetpassword/:token
 // acces : Public
-const ResetPassword = (req, res) => {
-    return res.status(200).json({ message: 'this function Reset Password' })
-}
+const ResetPassword = asyncHandler(async (req, res) => {
+    const token = req.params.token
+    const { password, password2 } = req.body
+    if (!password || !password2) {
+        return res.status(200).json({ message: 'Please ADD field' })
+    } else if (password != password2) {
+        return res.status(200).json({ message: 'Password not match' })
+    }
+    const user = await User.findOne({ token })
+    if (user) {
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
+        user.password = hashedPassword
+        user.save()
+        return res.status(200).json({ message: 'Your Password is Reset' })
+    } else {
+        return res.status(200).json({ message: 'Token not valide' })
+    }
+})
 
 // Generate JSON WEB TOKEN (JWT)
 const generateToken = (id) => {
@@ -88,4 +104,5 @@ module.exports = {
     Register,
     ForgetPassword,
     ResetPassword,
+    Verify,
 }
