@@ -17,7 +17,24 @@ const Register = (req, res) => {
 // url : api/auth/login
 // acces : Public
 const Login = asyncHandler(async (req, res) => {
-   
+    const { email, password } = req.body;
+    const user = await User.findOne({ email }).populate('role')
+    if (user && (await bcrypt.compare(password, user.password))) {
+        const tokengenerat = generateToken(user._id)
+        res.cookie('access', tokengenerat)
+        if (user.verified == true) {
+            res.status(200).json({
+                message: 'Welcome to profil',
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                verified: user.verified,
+                token: tokengenerat,
+                role: user.role
+            })
+            return res.status(200).json({ message: 'User is verified' })
+        } else { return res.status(401).json({ message: 'User not verified' }) }
+    } else { return res.status(401).json({ message: 'Invalid Email Or Password' }) }
 })
 
 // method : post
