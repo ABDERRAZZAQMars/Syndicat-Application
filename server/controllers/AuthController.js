@@ -51,6 +51,13 @@ const ResetPassword = (req, res) => {
     return res.status(200).json({ message: 'this function Reset Password' })
 }
 
+// Generate JSON WEB TOKEN (JWT)
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '1d',
+    })
+}
+
 module.exports = {
     Login,
     Register,
