@@ -1,3 +1,11 @@
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+const asyncHandler = require('express-async-handler')
+const User = require('../models/user/UserModel')
+const RoleModel = require('../models/user/RoleModel')
+const { sendConfirmationEmail, resetPasswordEmail } = require('../utils/SendEmail')
+const cookie = require('cookie-parser')
+
 // method : post
 // url : api/auth/register
 // acces : Public
@@ -8,9 +16,9 @@ const Register = (req, res) => {
 // method : post
 // url : api/auth/login
 // acces : Public
-const Login = (req, res) => {
-    return res.status(200).json({ message: 'this function Login' })
-}
+const Login = asyncHandler(async (req, res) => {
+   
+})
 
 // method : post
 // url : api/auth/forgetpassword
