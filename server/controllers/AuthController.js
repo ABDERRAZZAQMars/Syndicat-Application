@@ -11,6 +11,7 @@ const cookie = require('cookie-parser')
 // acces : Public
 const Register = asyncHandler(async (req, res) => {
     const { name, email, password, token, verified, role } = req.body
+    console.log(req.body);
     if (!name || !email || !password) {
         return res.status(200).json({ message: 'Please ADD All Fields' })
     }

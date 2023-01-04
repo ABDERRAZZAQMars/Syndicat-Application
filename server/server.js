@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: false }));
 
 //simple_route
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to Syndicat Application" });
-  });
+  res.json({ message: "Welcome to Syndicat Application" });
+});
 
 //Authentification_Routes
 app.use('/api/auth', Authentification);
@@ -25,6 +25,6 @@ app.listen(port, (err) => {
   if (!err) {
     console.log(`Server started on port ${port}`)
   } else {
-      console.log(err)
+    console.log(err)
   }
 });

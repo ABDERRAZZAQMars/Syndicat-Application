@@ -12,7 +12,7 @@ const transport = nodemailer.createTransport({
 })
 
 const sendConfirmationEmail = (name, email, confirmationCode, userid) => {
-    console.log("Check");
+    console.log("Check Email");
     transport.sendMail({
         from: user,
         to: email,
@@ -26,7 +26,7 @@ const sendConfirmationEmail = (name, email, confirmationCode, userid) => {
 }
 
 const resetPasswordEmail = (name, email, token) => {
-    console.log("Check");
+    console.log("Check Email");
     transport.sendMail({
         from: user,
         to: email,
@@ -34,7 +34,7 @@ const resetPasswordEmail = (name, email, token) => {
         html: `<h1>RESET PASSWORD</h1>
             <h2>Hello ${name}</h2> 
             <p>plaise n'oblier pas le code the next time</p>
-            <a href=http://localhost:5173/resetpassword/${token}> Reset pasword</a>
+            <a href=http://localhost:8000/resetpassword/${token}> Reset pasword</a>
             </div>`,
     }).catch(err => console.log(err));
 }
