@@ -8,7 +8,13 @@ import {
 } from './pages/auth/indexAuth'
 import {
   HomePage,
-  FacturesPage
+  FacturesPage,
+  AppartementsPage,
+  ClientsPage,
+  ImmeublesPage,
+  MessagesPage,
+  PaiementsPage,
+  ReglagesPage, 
 } from './pages/dashboard/indexDashboard'
 import Layout from './components/dashboard/shared/Layout';
 
@@ -22,7 +28,13 @@ function App() {
         <Route path='forgetpassword' element={<ForgetPasswordPage />} />
         <Route path="dashboard/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="factures" element={<FacturesPage />} />
+          <Route path="appartement" element={<AppartementsPage />} />
+          <Route path="client" element={<ClientsPage />} />
+          <Route path="immeuble" element={<ImmeublesPage />} />
+          <Route path="message" element={<MessagesPage />} />
+          <Route path="paiement" element={<PaiementsPage />} />
+          <Route path="reglage" element={<ReglagesPage />} />
+          <Route path="facture" element={<FacturesPage />} />
         </Route>
       </Routes>
     </div>

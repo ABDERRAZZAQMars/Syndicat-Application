@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BackgroundAuth from "../../assets/images/BackgoundAuth.jpg";
 import { Button, Input } from "../../components/auth/indexComponentsAuth";
+import LogoSyndicat from "../../assets/LogoSyndicat.png";
+import { ToastContainer, toast } from "react-toastify";
 
 function LoginPage() {
   return (
@@ -46,14 +48,15 @@ function LoginPage() {
           </div>
         </div>
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+          {/* <img src={LogoSyndicat} size="10" alt="" /> */}
+          <h1 className="text-5xl text-white font-bold">Syndicat</h1>
+          <p className="py-6 text-white">
+            Application de syndicat pour gérer les paiement pour chaque
+            appartement
           </p>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

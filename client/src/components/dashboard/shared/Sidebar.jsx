@@ -16,21 +16,44 @@ import {
   IoMdLogOut,
   BsBuilding,
   AiOutlineHome,
-  MdPayment
+  MdPayment,
 } from "../../../assets/icons";
-
 
 function Sidebar() {
   const menus = [
-    { name: "Dashboard", Link: "#", icon: MdOutlineDashboard, margin: true },
-    { name: "Clients", Link: "#", icon: FiUsers, margin: true },
-    { name: "Messages", Link: "#", icon: BiMessageSquare },
-    { name: "Immeubles", Link: "#", icon: BsBuilding, margin: true },
-    { name: "Appartements", Link: "#", icon: AiOutlineHome },
-    { name: "Paiements", Link: "#", icon: MdPayment, margin: true },
-    { name: "Factures", Link: "#", icon: AiOutlineFileText },
-    { name: "Réglages", Link: "#", icon: AiOutlineSetting, margin: true },
-    { name: "Se déconnecter", Link: "#", icon: IoMdLogOut },
+    {
+      name: "Dashboard",
+      Link: "/dashboard",
+      icon: MdOutlineDashboard,
+      margin: true,
+    },
+    { name: "Clients", Link: "/dashboard/client", icon: FiUsers, margin: true },
+    { name: "Messages", Link: "/dashboard/message", icon: BiMessageSquare },
+    {
+      name: "Immeubles",
+      Link: "/dashboard/immeuble",
+      icon: BsBuilding,
+      margin: true,
+    },
+    {
+      name: "Appartements",
+      Link: "/dashboard/appartement",
+      icon: AiOutlineHome,
+    },
+    {
+      name: "Paiements",
+      Link: "/dashboard/paiement",
+      icon: MdPayment,
+      margin: true,
+    },
+    { name: "Factures", Link: "/dashboard/facture", icon: AiOutlineFileText },
+    {
+      name: "Réglages",
+      Link: "/dashboard/reglage",
+      icon: AiOutlineSetting,
+      margin: true,
+    },
+    { name: "Se déconnecter", Link: "/", icon: IoMdLogOut },
   ];
   const [open, setOpen] = useState(true);
   return (
