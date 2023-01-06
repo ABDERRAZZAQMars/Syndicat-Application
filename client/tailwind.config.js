@@ -1,28 +1,38 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = require('tailwindcss/colors')
+
 module.exports = {
+  darkMode: "class",
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {},
-    mytheme: {
-      "primary": "#6419E6",
-      "secondary": "#D926A9",
-      "accent": "#1FB2A6",
-      "neutral": "#191D24",
-      "base-100": "#2A303C",
-      "info": "#3ABFF8",
-      "success": "#36D399",
-      "warning": "#FBBD23",
-      "error": "#F87272",
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: colors.black,
+      white: colors.white,
+      gray: colors.gray,
+      emerald: colors.emerald,
+      indigo: colors.indigo,
+      yellow: colors.yellow,
+      red: colors.red,
+      green: colors.green,
+      'color-primary': '#00aeef',
+      'color-secondary': '#36517e',
     },
+    fontFamily: {
+      main: ['Roboto', 'sans-serif'],
+      mini: ['Montserrat', 'sans-serif'],
+    }
   },
   plugins: [require("daisyui")],
-
   daisyui: {
     styled: true,
     themes: ["light"],
-    base: true,
+    base: false,
     utils: true,
     logs: true,
     rtl: false,
