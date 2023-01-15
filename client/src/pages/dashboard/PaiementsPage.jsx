@@ -1,9 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import { FormAddPayment } from "../../components/dashboard/formAdd";
 function PaiementsPage() {
   return (
-    <div>PaiementsPage</div>
-  )
+    <div>
+      <FormAddPayment/>
+    </div>
+  );
 }
 
-export default PaiementsPage
+export default PaiementsPage;

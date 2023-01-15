@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import TableFacture from "../../components/dashboard/tables/TableFacture";
 
 function FacturesPage() {
   return (
-    <div>FacturesPage</div>
-  )
+    <div>
+      <TableFacture />
+    </div>
+  );
 }
 
-export default FacturesPage
+export default FacturesPage;

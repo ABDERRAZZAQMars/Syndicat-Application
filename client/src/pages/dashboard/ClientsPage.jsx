@@ -1,8 +1,11 @@
 import React from 'react'
+import TableClient from "../../components/dashboard/tables/TableClient";
 
 function ClientsPage() {
   return (
-    <div>ClientsPage</div>
+    <div>
+      <TableClient />
+    </div>
   )
 }
 

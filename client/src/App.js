@@ -16,6 +16,12 @@ import {
   PaiementsPage,
   ReglagesPage, 
 } from './pages/dashboard/indexDashboard'
+import {
+  FormAddPayment,
+  FormAddClient,
+  FormAddImmeuble,
+  FormAddAppartement
+} from './components/dashboard/formAdd/index'
 import Layout from './components/dashboard/shared/Layout';
 
 function App() {
@@ -35,6 +41,10 @@ function App() {
           <Route path="paiement" element={<PaiementsPage />} />
           <Route path="reglage" element={<ReglagesPage />} />
           <Route path="facture" element={<FacturesPage />} />
+          <Route path="formaddpayment" element={<FormAddPayment />} />
+          <Route path="formaddclient" element={<FormAddClient />} />
+          <Route path="formaddimmeuble" element={<FormAddImmeuble />} />
+          <Route path="formaddappartement" element={<FormAddAppartement />} />
         </Route>
       </Routes>
     </div>

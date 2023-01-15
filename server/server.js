@@ -1,12 +1,14 @@
 const dotenv = require('dotenv').config()
-
 const express = require('express')
 const app = express();
 const port = process.env.PORT || 8081
-const Authentification = require('./routes/AuthRoute');
-const globalError = require('./Middlewares/errorHandler');
+const Authentification = require('./routes/AuthRouters');
+const globalError = require('./middlewares/errorHandler');
 const db = require('./config/db')
 const cors = require('cors');
+const appartement = require('./routes/AppartementRouters');
+const client = require('./routes/ClientRouters');
+const payment = require('./routes/PaymentRouters');
 
 
 app.use(express.json());
@@ -23,8 +25,11 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Syndicat Application" });
 });
 
-//Authentification_Routes
+//Routes
 app.use('/api/auth', Authentification);
+app.use('/api/admin' , appartement); 
+app.use('/api/admin' , client); 
+app.use('/api/admin' , payment); 
 
 //Error_Handler
 app.use(globalError);
