@@ -3,8 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import BackgroundAuth from "../../assets/images/BackgoundAuth.jpg";
 import { Button, Input } from "../../components/auth/indexComponentsAuth";
 import { ToastContainer, toast } from "react-toastify";
+import { useState } from 'react';
+import axios from "axios";
 
 function LoginPage() {
+  
   return (
     <div
       className="hero min-h-screen bg-base-200"

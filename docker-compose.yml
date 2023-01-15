@@ -1,0 +1,37 @@
+version: '4'
+services:
+  mongodb:
+    image: mongo
+    ports:
+    - 27017:27017
+    networks:
+      - syndicat-net
+
+  server:
+    container_name: server
+    ports:
+      - 8000:8000
+    build: ./server
+    networks:
+      - syndicat-net
+    depends_on:
+      - mongodb
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  client:
+    container_name: client
+    ports:
+      - 3000:3000
+    build: ./client
+    networks:
+      - syndicat-net
+    depends_on:
+      - server
+    volumes:
+      - ./client/src:/app/src
+
+networks:
+  syndicat-net:
+    driver: bridge 

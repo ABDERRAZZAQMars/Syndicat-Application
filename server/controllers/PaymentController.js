@@ -75,7 +75,7 @@ const UpdatePaiment = asyncHandler(async (req, res) => {
         Statut_Payment
     })
     if (checkPaimentAndUpdate) {
-        return res.status(200).json({ message: "Client créé avec succès !" });
+        return res.status(200).json({ message: "Client et modifier avec succès !" });
     } else {
         return res.status(400).json({ message: "Erreur veuillez réessayer plus tard !" });
     }

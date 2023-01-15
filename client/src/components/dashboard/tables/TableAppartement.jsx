@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
 
-function TableAppartement() {
+function TableAppartement({ apartments }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -34,28 +34,28 @@ function TableAppartement() {
             <tr>
               <th>ID</th>
               <th>Immeuble</th>
-              <th>étage</th>
               <th>Number</th>
               <th>Status</th>
               <th>Option</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>A10000000029</td>
-              <td>Imm YASSMINE</td>
-              <td>étage 10</td>
-              <td>App 24</td>
-              <td>Occupied</td>
-              <td className="flex flex-row gap-2">
-                <button className="btn btn-ghost btn-xs bg-color-primary text-white">
-                  Modifier
-                </button>
-                <button className="btn btn-ghost btn-xs bg-red-600 text-white">
-                  Suprimer
-                </button>
-              </td>
-            </tr>
+            {apartments.map((apartment) => (
+              <tr>
+                <td>{apartment._id}</td>
+                <td>{apartment.Name_Immeuble}</td>
+                <td>{apartment.Number_Appartement}</td>
+                <td>{apartment.Status}</td>
+                <td className="flex flex-row gap-2">
+                  <button className="btn btn-ghost btn-xs bg-color-primary text-white">
+                    Modifier
+                  </button>
+                  <button className="btn btn-ghost btn-xs bg-red-600 text-white">
+                    Suprimer
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

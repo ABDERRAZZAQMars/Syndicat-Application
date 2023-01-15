@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
 
-function TableClient() {
+function TableClient({ clients }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -32,6 +32,7 @@ function TableClient() {
         <table className="table table-compact w-full">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Prénom</th>
               <th>Nom de famille</th>
               <th>CIN</th>
@@ -42,22 +43,25 @@ function TableClient() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>ABDERRAZZAQ</td>
-              <td>MARS</td>
-              <td>HA215650</td>
-              <td>abderrazzaqmars99@gmail.com</td>
-              <td>+212660082403</td>
-              <td>A10000000029</td>
-              <td className="flex flex-row gap-2">
-                <button className="btn btn-ghost btn-xs bg-color-primary text-white">
-                  Modifier
-                </button>
-                <button className="btn btn-ghost btn-xs bg-red-600 text-white">
-                  Suprimer
-                </button>
-              </td>
-            </tr>
+            {clients.map((client) => (
+              <tr>
+                <td>{client._id}</td>
+                <td>{client.First_Name}</td>
+                <td>{client.Last_Name}</td>
+                <td>{client.CIN}</td>
+                <td>{client.Email}</td>
+                <td>{client.Phone}</td>
+                <td>{client.Number_Appartement}</td>
+                <td className="flex flex-row gap-2">
+                  <button className="btn btn-ghost btn-xs bg-color-primary text-white">
+                    Modifier
+                  </button>
+                  <button className="btn btn-ghost btn-xs bg-red-600 text-white">
+                    Suprimer
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

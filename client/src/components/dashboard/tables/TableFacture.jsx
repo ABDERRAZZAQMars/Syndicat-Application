@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
 
-function TableFacture() {
+function TableFacture({ factures }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -35,7 +35,6 @@ function TableFacture() {
               <th>ID</th>
               <th>CIN</th>
               <th>Immeuble</th>
-              <th>Zone</th>
               <th>Appartement</th>
               <th>Date</th>
               <th>Montant</th>
@@ -44,27 +43,28 @@ function TableFacture() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>F57890992</td>
-              <td>HA215650</td>
-              <td>Imm YASSMINE</td>
-              <td>Zone A1</td>
-              <td>App 24</td>
-              <td>08/01/2023</td>
-              <td>1000 Dh</td>
-              <td>Non Payé</td>
-              <td className="flex flex-row gap-2">
-                <button className="btn btn-ghost btn-xs bg-color-primary text-white">
-                  Modifier
-                </button>
-                <button className="btn btn-ghost btn-xs bg-red-600 text-white">
-                  Suprimer
-                </button>
-                <button className="btn btn-ghost btn-xs bg-color-secondary text-white">
-                  Facture
-                </button>
-              </td>
-            </tr>
+            {factures.map((facture) => (
+              <tr>
+                <td>{facture._id}</td>
+                <td>{facture.CIN.CIN}</td>
+                <td>{facture.Name_Immeuble}</td>
+                <td>{facture.Number_Appartement._id}</td>
+                <td>{facture.Date}</td>
+                <td>{facture.Montant}DH</td>
+                <td>{facture.Statut_Payment}</td>
+                <td className="flex flex-row gap-2">
+                  <button className="btn btn-ghost btn-xs bg-color-primary text-white">
+                    Modifier
+                  </button>
+                  <button className="btn btn-ghost btn-xs bg-red-600 text-white">
+                    Suprimer
+                  </button>
+                  <button className="btn btn-ghost btn-xs bg-color-secondary text-white">
+                    Facture
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
