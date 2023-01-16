@@ -1,16 +1,21 @@
 import axios from "axios";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Input } from "./index";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Button, Input } from "../formAdd/index";
 
 const LINK = "http://localhost:8000/api/admin";
 
-function FormAddAppartement() {
+function FormUpdateAppartement() {
   const [data, setData] = useState({
     Name_Immeuble: "",
     Number_Appartement: "",
   });
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios.get(LINK + "/appartement/" + id).then((res) => setData(res.data));
+  }, []);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -18,7 +23,7 @@ function FormAddAppartement() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(LINK + "/appartement", data);
+    await axios.put(LINK + "/appartement/" + id, data);
     navigate("/dashboard/appartement");
   };
 
@@ -49,6 +54,7 @@ function FormAddAppartement() {
                 placeholder=""
               />
             </div>
+    
             <div>
               <label className="label text-xs font-medium">
                 Number de Appartement
@@ -72,4 +78,4 @@ function FormAddAppartement() {
   );
 }
 
-export default FormAddAppartement;
+export default FormUpdateAppartement;

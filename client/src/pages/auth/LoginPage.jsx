@@ -1,13 +1,47 @@
-import React from "react";
+import axios from "axios";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BackgroundAuth from "../../assets/images/BackgoundAuth.jpg";
 import { Button, Input } from "../../components/auth/indexComponentsAuth";
 import { ToastContainer, toast } from "react-toastify";
-import { useState } from 'react';
-import axios from "axios";
+import { UserContext } from "../../useContext/UserContext";
+import { useContext } from "react";
+
+
+const LINK = "http://localhost:8000/api/auth";
 
 function LoginPage() {
-  
+  const {setAuth} = useContext(UserContext)
+
+  const [data, setData] = useState({
+    Email: "",
+    Password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post(LINK + "/login", data)
+      .then((result) => {
+        console.log(result.data.token);
+        setAuth(result.data)
+        const token = result.data.token;
+        localStorage.setItem("token", token);
+        toast.success(result.data.admin.Full_Name);
+        navigate("dashboard");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        error = new Error();
+      });
+  };
+
   return (
     <div
       className="hero min-h-screen bg-base-200"
@@ -17,22 +51,29 @@ function LoginPage() {
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="my-5 mx-3 px-3">
             <p className="text-2xl mb-6 font-bold">Connexion</p>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div>
                 <label className="label text-xs font-medium">
                   Adresse email - Format: exemple@mail.com
                 </label>
-                <Input type="email" name="email" id="email" placeholder="" />
+                <Input
+                  value={data.Email}
+                  onChange={handleChange}
+                  type="email"
+                  name="Email"
+                  id="Email"
+                />
               </div>
               <div>
                 <label className="label text-xs font-medium">
                   Mot de passe
                 </label>
                 <Input
+                  value={data.Password}
+                  onChange={handleChange}
                   type="password"
-                  name="password"
-                  id="password"
-                  placeholder=""
+                  name="Password"
+                  id="Password"
                 />
               </div>
               <div className="mt-2">

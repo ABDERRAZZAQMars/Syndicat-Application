@@ -1,8 +1,17 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
 
-function TableClient({ clients }) {
+const LINK = "http://localhost:8000/api/admin";
+
+function TableClient({ clients, setDeleted }) {
+  const deleteClient = (id) => {
+    axios
+      .delete(LINK + "/client/" + id)
+      .then(() => setDeleted((prev) => !prev));
+  };
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -53,12 +62,24 @@ function TableClient({ clients }) {
                 <td>{client.Phone}</td>
                 <td>{client.Number_Appartement}</td>
                 <td className="flex flex-row gap-2">
-                  <button className="btn btn-ghost btn-xs bg-color-primary text-white">
+                  <Link
+                    to={"/dashboard/formupdateclient/" + client._id}
+                    className="btn btn-ghost btn-xs bg-color-primary text-white"
+                  >
                     Modifier
-                  </button>
-                  <button className="btn btn-ghost btn-xs bg-red-600 text-white">
+                  </Link>
+                  <button
+                    onClick={() => deleteClient(client._id)}
+                    className="btn btn-ghost btn-xs bg-red-600 text-white"
+                  >
                     Suprimer
                   </button>
+                  <Link
+                    to={"/dashboard/paiement/" + client._id}
+                    className="btn btn-ghost btn-xs bg-color-secondary text-white"
+                  >
+                    Paiement
+                  </Link>
                 </td>
               </tr>
             ))}

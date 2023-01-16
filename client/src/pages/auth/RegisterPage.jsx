@@ -1,10 +1,31 @@
-import React from "react";
+import axios from "axios";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BackgroundAuth from "../../assets/images/BackgoundAuth.jpg";
 import { Button, Input } from "../../components/auth/indexComponentsAuth";
 import { ToastContainer, toast } from "react-toastify";
 
+const LINK = "http://localhost:8000/api/auth";
+
 function RegisterPage() {
+  const [data, setData] = useState({
+    Full_Name: "",
+    Email: "",
+    Password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post(LINK + "/register", data);
+    navigate("/");
+  };
+
   return (
     <div
       className="hero min-h-screen bg-base-200"
@@ -14,40 +35,41 @@ function RegisterPage() {
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="my-5 mx-3 px-3">
             <p className="text-2xl mb-6 font-bold">Créez votre compte</p>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div>
                 <label className="label text-xs font-medium">Votre Name</label>
-                <Input type="text" name="text" id="text" placeholder="" />
+                <Input
+                  value={data.Full_Name}
+                  onChange={handleChange}
+                  type="text"
+                  name="Full_Name"
+                  id="Full_Name"
+                />
               </div>
               <div>
                 <label className="label text-xs font-medium">
                   Adresse email - Format: exemple@mail.com
                 </label>
-                <Input type="email" name="email" id="email" placeholder="" />
+                <Input
+                  value={data.Email}
+                  onChange={handleChange}
+                  type="email"
+                  name="Email"
+                  id="Email"
+                />
               </div>
               <div>
                 <label className="label text-xs font-medium">
                   Nouveau mot de passe
                 </label>
                 <Input
+                  value={data.Password}
+                  onChange={handleChange}
                   type="password"
-                  name="password"
-                  id="password"
-                  placeholder=""
+                  name="Password"
+                  id="Password"
                 />
               </div>
-              <div>
-                <label className="label text-xs font-medium">
-                  Confirmer mot de passe
-                </label>
-                <Input
-                  type="password"
-                  name="confirmer"
-                  id="confirmer"
-                  placeholder=""
-                />
-              </div>
-
               <div className="mt-3 font-main">
                 <Button
                   type="submit"
@@ -61,7 +83,7 @@ function RegisterPage() {
                   to={"/"}
                   className="text-blue-500 text-xs focus:outline-none text-color-primary font-medium hover:text-color-secondary focus:underline hover:underline"
                 >
-                   Connectez-vous
+                  Connectez-vous
                 </Link>
               </div>
             </form>

@@ -8,13 +8,8 @@ const paymentSchema = mongoose.Schema({
         require: [true, "SVP Entrer Votre CIN"],
         ref: Client
     },
-    Name_Immeuble: {
-        type: String,
-        require: [true, "SVP Entrer Votre Name de immeuble"],
-        ref: Appartement
-    },
     Number_Appartement: {
-        type: String,
+        type: Number,
         require: [true, "SVP Entrer Votre Number de Appartement"],
         ref: Appartement
     },

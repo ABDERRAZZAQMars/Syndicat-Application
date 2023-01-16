@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Input } from "./index";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Button, Input } from "../formAdd/index";
+
 const LINK = "http://localhost:8000/api/admin";
 
-function FormAddClient() {
+function FormUpdateClient() {
   const [data, setData] = useState({
     First_Name: "",
     Last_Name: "",
@@ -15,12 +16,16 @@ function FormAddClient() {
   });
 
   const [apartments, setApartments] = useState([]);
-
   useEffect(() => {
     axios.get(LINK + "/appartements").then((res) => setApartments(res.data));
   }, []);
 
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios.get(LINK + "/client/" + id).then((res) => setData(res.data));
+  }, []);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -28,10 +33,9 @@ function FormAddClient() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(LINK + "/client", data);
+    await axios.put(LINK + "/client/" + id, data);
     navigate("/dashboard/client");
   };
-
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -122,7 +126,7 @@ function FormAddClient() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default FormAddClient;
+export default FormUpdateClient

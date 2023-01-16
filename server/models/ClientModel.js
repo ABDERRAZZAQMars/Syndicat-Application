@@ -19,7 +19,7 @@ const clientSchema = mongoose.Schema({
         require: [true, "SVP Entrer Votre E-mail"]
     },
     Phone: {
-        type: Number,
+        type: String,
         require: [true, "SVP Entrer Votre Number de Télélphone"]
     },
     Number_Appartement: {

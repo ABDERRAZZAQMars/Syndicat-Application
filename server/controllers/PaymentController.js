@@ -9,8 +9,8 @@ const AppartementModel = require('../models/AppartementModel');
 // acces : Private - Admin
 
 const CreatePaiment = asyncHandler(async (req, res) => {
-    const { CIN, Name_Immeuble, Number_Appartement, Date, Montant, Statut_Payment } = req.body;
-    if (!CIN || !Name_Immeuble || !Number_Appartement || !Date || !Montant || !Statut_Payment) {
+    const { CIN, Number_Appartement, Date, Montant, Statut_Payment } = req.body;
+    if (!CIN || !Number_Appartement || !Date || !Montant || !Statut_Payment) {
         return res.status(400).json({ message: "Veuillez remplir tous les champs" })
     }
     // search for ID appartement TO send in req Add Paiment
@@ -29,7 +29,6 @@ const CreatePaiment = asyncHandler(async (req, res) => {
     // send DATA to table Paiment:
     const paiment = await Paiment.create({
         CIN: idClient,
-        Name_Immeuble,
         Number_Appartement: idAppartement,
         Date,
         Montant,
@@ -47,9 +46,9 @@ const CreatePaiment = asyncHandler(async (req, res) => {
 // acces : Private - Admin
 
 const UpdatePaiment = asyncHandler(async (req, res) => {
-    const { CIN, Name_Immeuble, Number_Appartement, Date, Montant, Statut_Payment } = req.body;
+    const { CIN,  Number_Appartement, Date, Montant, Statut_Payment } = req.body;
     const _id = req.params.id;
-    if (!CIN || !Name_Immeuble || !Number_Appartement || !Date || !Montant || !Statut_Payment) {
+    if (!CIN || !Number_Appartement || !Date || !Montant || !Statut_Payment) {
         return res.status(400).json({ message: "Veuillez remplir tous les champs" })
     }
     // search for ID appartement TO send in req Add Paiment
@@ -68,7 +67,6 @@ const UpdatePaiment = asyncHandler(async (req, res) => {
     // send DATA to table Paiment:
     const checkPaimentAndUpdate = await Paiment.findOneAndUpdate({ _id }, {
         CIN: idClient,
-        Name_Immeuble,
         Number_Appartement: idAppartement,
         Date,
         Montant,

@@ -9,12 +9,7 @@ const appartementSchema = mongoose.Schema({
         type: Number,
         required: [true, "SVP Entrer Votre Number de Appartement"],
         unique: true
-    },
-    Status:{
-        type: String,
-        enum: ['libre', 'occupée'],
-        default: 'libre',
-    },
+    }
 })
 
 module.exports=mongoose.model("Appartement",appartementSchema);

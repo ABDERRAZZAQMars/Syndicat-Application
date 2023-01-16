@@ -6,8 +6,8 @@ const Appartement = require('../models/AppartementModel');
 // acces : Private - Admin
 
 const CreateAppartement = asyncHandler(async (req, res) => {
-    const { Name_Immeuble, Numbre_Etage_Appartement, Number_Appartement, Status } = req.body;
-    if (!Name_Immeuble || !Numbre_Etage_Appartement || !Number_Appartement || !Status) {
+    const { Name_Immeuble, Number_Appartement} = req.body;
+    if (!Name_Immeuble || !Number_Appartement ) {
         return res.status(400).json({ message: "Merci de compléter tous les champs !" })
     }
 
@@ -18,9 +18,7 @@ const CreateAppartement = asyncHandler(async (req, res) => {
     // Create Appartement :
     const appartement = await Appartement.create({
         Name_Immeuble,
-        Numbre_Etage_Appartement,
-        Number_Appartement,
-        Status
+        Number_Appartement
     })
     if (appartement) {
         return res.status(200).json({ message: "Appartement créé avec succès !" })
@@ -46,18 +44,16 @@ const DeleteAppartement = asyncHandler(async (req, res) => {
 // acces : Private - Admin
 
 const UpdateAppartement = asyncHandler(async (req, res) => {
-    const { Name_Immeuble, Numbre_Etage_Appartement, Number_Appartement, Status } = req.body;
+    const { Name_Immeuble, Number_Appartement } = req.body;
     const _id = req.params.id;
 
-    if (!Name_Immeuble || !Numbre_Etage_Appartement || !Number_Appartement || !Status) {
+    if (!Name_Immeuble || !Number_Appartement) {
         return res.status(400).json({ message: "please fill all fields !" })
     }
 
     const checkAppartementAndUpdate = await Appartement.findOneAndUpdate({ _id }, {
         Name_Immeuble,
-        Numbre_Etage_Appartement,
-        Number_Appartement,
-        Status
+        Number_Appartement
     })
 
     if (checkAppartementAndUpdate) {

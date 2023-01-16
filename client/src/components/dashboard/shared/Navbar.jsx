@@ -1,12 +1,18 @@
 import React from "react";
+import { useContext } from "react";
 import {
   HiMenuAlt2,
   FaUserCircle,
   HiMenuAlt3,
   BiSearch,
 } from "../../../assets/icons";
+import { UserContext } from "../../../useContext/UserContext";
+
 
 function Navbar() {
+
+  const {auth} = useContext(UserContext)
+  
   return (
     <div className="navbar bg-gray-800 text-white">
       <div className="navbar-start">
@@ -19,7 +25,8 @@ function Navbar() {
               <FaUserCircle size={24} className="cursor-pointer" />
             </div>
           </label>
-          <p className="text-white">ABDERRAZZAQ Mars</p>
+          <p className="text-white">{auth.admin?.Full_Name ? auth.admin?.Full_Name : 'Admin' } </p>
+          
         </div>
       </div>
     </div>

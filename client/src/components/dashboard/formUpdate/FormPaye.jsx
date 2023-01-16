@@ -1,36 +1,35 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, Input } from "./index";
+import { Button, Input } from "../formAdd/index";
 
 const LINK = "http://localhost:8000/api/admin";
 
-function FormAddPayment() {
-  const [data, setData] = useState({
-    CIN: "",
-    Number_Appartement: "",
-    Date: "",
-    Montant: "",
-    Statut_Payment: "",
-  });
-
-  const navigate = useNavigate();
-  const { id } = useParams();
-
-  useEffect(() => {
-    axios.get(LINK + "/client/" + id).then((res) => setData(res.data));
-  }, []);
-
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await axios.post(LINK + "/payment", data);
-    navigate("/dashboard/facture");
-  };
-
+function FormPaye() {
+    const [data, setData] = useState({
+        CIN: "",
+        Number_Appartement: "",
+        Date: "",
+        Montant: "",
+        Statut_Payment: "",
+      });
+    
+      const navigate = useNavigate();
+      const { id } = useParams();
+    
+      useEffect(() => {
+        axios.get(LINK + "/payment/" + id).then((res) => setData(res.data));
+      }, []);
+    
+      const handleChange = (e) => {
+        setData({ ...data, [e.target.name]: e.target.value });
+      };
+    
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        await axios.put(LINK + "/payment", data);
+        navigate("/dashboard/facture");
+      };
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -98,9 +97,8 @@ function FormAddPayment() {
                 onChange={handleChange}
                 name="Statut_Payment"
                 id="Statut_Payment"
-                className="select w-full block px-4 py-2 rounded-none text-gray-700 placeholder-gray-400 bg-white border border-gray-200 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="select w-full block px-4 py-2 rounded-none placeholder-gray-400 bg-green-500 text-white border border-gray-200 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
               >
-                <option>No Payé</option>
                 <option>Payé</option>
               </select>
             </div>
@@ -111,7 +109,7 @@ function FormAddPayment() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default FormAddPayment;
+export default FormPaye

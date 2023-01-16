@@ -1,8 +1,17 @@
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
 
-function TableAppartement({ apartments }) {
+const LINK = "http://localhost:8000/api/admin";
+
+function TableAppartement({ apartments, setDeleted }) {
+  const deleteApartment = (id) => {
+    axios
+      .delete(LINK + "/appartement/" + id)
+      .then(() => setDeleted((prev) => !prev));
+  };
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -35,7 +44,6 @@ function TableAppartement({ apartments }) {
               <th>ID</th>
               <th>Immeuble</th>
               <th>Number</th>
-              <th>Status</th>
               <th>Option</th>
             </tr>
           </thead>
@@ -45,12 +53,17 @@ function TableAppartement({ apartments }) {
                 <td>{apartment._id}</td>
                 <td>{apartment.Name_Immeuble}</td>
                 <td>{apartment.Number_Appartement}</td>
-                <td>{apartment.Status}</td>
                 <td className="flex flex-row gap-2">
-                  <button className="btn btn-ghost btn-xs bg-color-primary text-white">
+                  <Link
+                    to={"/dashboard/formupdateappartement/" + apartment._id}
+                    className="btn btn-ghost btn-xs bg-color-primary text-white"
+                  >
                     Modifier
-                  </button>
-                  <button className="btn btn-ghost btn-xs bg-red-600 text-white">
+                  </Link>
+                  <button
+                    onClick={() => deleteApartment(apartment._id)}
+                    className="btn btn-ghost btn-xs bg-red-600 text-white"
+                  >
                     Suprimer
                   </button>
                 </td>

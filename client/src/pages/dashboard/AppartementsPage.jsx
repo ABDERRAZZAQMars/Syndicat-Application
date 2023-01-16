@@ -5,14 +5,15 @@ const LINK = "http://localhost:8000/api/admin";
 
 function AppartementsPage() {
   const [apartments, setApartments] = useState([]);
+  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     axios.get(LINK + "/appartements").then((res) => setApartments(res.data));
-  }, []);
+  }, [deleted]);
 
   return (
     <div>
-      <TableAppartement apartments={apartments} />
+      <TableAppartement apartments={apartments} setDeleted={setDeleted} />
     </div>
   );
 }

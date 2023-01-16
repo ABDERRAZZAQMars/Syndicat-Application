@@ -1,8 +1,16 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
 
-function TableFacture({ factures }) {
+const LINK = "http://localhost:8000/api/admin";
+
+function TableFacture({ factures, setDeleted }) {
+  const deletefacture = (id) => {
+    axios
+      .delete(LINK + "/payment/" + id)
+      .then(() => setDeleted((prev) => !prev));
+  };
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -34,7 +42,6 @@ function TableFacture({ factures }) {
             <tr>
               <th>ID</th>
               <th>CIN</th>
-              <th>Immeuble</th>
               <th>Appartement</th>
               <th>Date</th>
               <th>Montant</th>
@@ -47,16 +54,21 @@ function TableFacture({ factures }) {
               <tr>
                 <td>{facture._id}</td>
                 <td>{facture.CIN.CIN}</td>
-                <td>{facture.Name_Immeuble}</td>
                 <td>{facture.Number_Appartement._id}</td>
                 <td>{facture.Date}</td>
                 <td>{facture.Montant}DH</td>
                 <td>{facture.Statut_Payment}</td>
                 <td className="flex flex-row gap-2">
-                  <button className="btn btn-ghost btn-xs bg-color-primary text-white">
-                    Modifier
-                  </button>
-                  <button className="btn btn-ghost btn-xs bg-red-600 text-white">
+                  <Link
+                    to={"/dashboard/formpaye/" + facture._id}
+                    className="btn btn-ghost btn-xs bg-color-primary text-white"
+                  >
+                    Paiment
+                  </Link>
+                  <button
+                    onClick={() => deletefacture(facture._id)}
+                    className="btn btn-ghost btn-xs bg-red-600 text-white"
+                  >
                     Suprimer
                   </button>
                   <button className="btn btn-ghost btn-xs bg-color-secondary text-white">
